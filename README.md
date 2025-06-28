@@ -1,36 +1,76 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# EduMorph – Personalized AI-Powered Learning Platform 🎓🤖
 
-First, run the development server:
+EduMorph is an AI-driven education platform that adapts to individual learning needs. It integrates flashcard generation, quizzes, and a chatbot tutor powered by LLMs – all in a beautifully styled Next.js application.
+
+---
+
+## 🚀 Features
+
+- ✍️ **Flashcard Generator** – Turn text or notes into interactive flashcards
+- 🧠 **Quiz Mode** – Practice memory recall with generated flashcards
+- 🤖 **AI Chatbot Tutor** – Ask questions and get real-time answers
+- ⚙️ **Settings Page** – Customize theme, font size, and AI behavior
+- 🔐 **Authentication** – Email/password login with Firebase
+- 🎨 **Responsive Design** – Clean UI with TailwindCSS and custom theme
+- ☁️ **Live Deployment** – Hosted on Vercel
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/YOUR_USERNAME/edumorph.git
+cd edumorph
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+   npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Add environment variables
+   Create a .env.local file in the root with your Firebase and Groq API keys:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 
-## Learn More
+GROQ_API_KEY=your_groq_api_key
 
-To learn more about Next.js, take a look at the following resources:
+4. Run the development server
+   npm run dev
+   Visit http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. 📁 Project Structure
+   src/
+   ├── app/
+   │ ├── login, signup, dashboard/
+   │ ├── flashcards, chat, setting/
+   │ └── api/groq/route.ts
+   ├── components/
+   │ └── Navbar.tsx
+   ├── lib/
+   │ └── firebase.ts
+   ├── styles/
+   │ └── globals.css
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+6. 🧠 Tech Stack
 
-## Deploy on Vercel
+Next.js 14 (App Router)
+Tailwind CSS
+Firebase Auth
+Groq LLM API
+Framer Motion (optional UI animation)
+PDF.js (optional summarizer)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+7. 📦 Deployment
+   Hosted on Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+8. Contributors
+   Made By Akshay Kashyap M
