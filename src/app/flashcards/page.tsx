@@ -6,14 +6,18 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import "./flashcard.css";
 
+type Flashcard = {
+  question: string;
+  answer: string;
+};
+
 export default function FlashcardGenerator() {
   const router = useRouter();
-
   const [inputText, setInputText] = useState("");
-  const [flashcards, setFlashcards] = useState([]);
+  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [loading, setLoading] = useState(false);
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
 
-  // ✅ Redirect to login if user is not authenticated
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (!user) router.replace("/login");
@@ -47,6 +51,7 @@ export default function FlashcardGenerator() {
       const data = await res.json();
       const parsed = JSON.parse(data.reply);
       setFlashcards(parsed);
+      setFlippedCards(new Set()); // reset flip state on new generation
     } catch (err) {
       console.error("Flashcard generation error:", err);
       setFlashcards([]);
@@ -57,7 +62,7 @@ export default function FlashcardGenerator() {
 
   return (
     <main className="min-h-screen bg-[#EBFFD8] p-6">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+      <div className="max-w-5xl mx-auto bg-white p-6 rounded-xl shadow min-h-[80vh]">
         <h1 className="text-3xl font-bold text-[#8DBCC7] mb-4 text-center">
           Flashcard Generator
         </h1>
@@ -79,19 +84,34 @@ export default function FlashcardGenerator() {
         </button>
 
         {flashcards.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-4">
-            {flashcards.map((card: any, i: number) => (
-              <div key={i} className="flip-card">
-                <div className="flip-card-inner">
-                  <div className="flip-card-front bg-[#C4E1E6] p-4 rounded shadow">
-                    <h3 className="font-bold">Q: {card.question}</h3>
+          <div className="mt-6">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {flashcards.map((card, i) => {
+                const isFlipped = flippedCards.has(i);
+                return (
+                  <div
+                    key={i}
+                    className={`flip-card ${isFlipped ? "flipped" : ""}`}
+                    onClick={() => {
+                      const newFlipped = new Set(flippedCards);
+                      newFlipped.has(i)
+                        ? newFlipped.delete(i)
+                        : newFlipped.add(i);
+                      setFlippedCards(newFlipped);
+                    }}
+                  >
+                    <div className="flip-card-inner">
+                      <div className="flip-card-front">
+                        <h3>Q: {card.question}</h3>
+                      </div>
+                      <div className="flip-card-back">
+                        <p>A: {card.answer}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flip-card-back bg-[#A4CCD9] p-4 rounded shadow">
-                    <p className="text-sm">A: {card.answer}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

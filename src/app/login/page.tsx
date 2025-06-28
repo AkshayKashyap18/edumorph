@@ -49,7 +49,7 @@ export default function LoginPage() {
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 border border-[#8DBCC7] rounded focus:outline-none focus:ring-2"
+            className="w-full p-3 border border-[#8DBCC7] rounded focus:outline-none focus:ring-2 text-black"
             style={{
               backgroundColor: "#EBFFD8",
             }}
@@ -60,7 +60,7 @@ export default function LoginPage() {
           <input
             type="password"
             placeholder="Password"
-            className="w-full p-3 border border-[#8DBCC7] rounded focus:outline-none focus:ring-2"
+            className="w-full p-3 border border-[#8DBCC7] rounded focus:outline-none focus:ring-2 text-black"
             style={{
               backgroundColor: "#EBFFD8",
             }}
